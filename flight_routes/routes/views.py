@@ -1,4 +1,6 @@
 from django.shortcuts import render
+
+from routes.models import Airport
 from .forms import AirportForm, SearchForm
 
 
@@ -32,4 +34,13 @@ def find_path(request):
     return render(request, 'search.html', {
         'form': form,
         'path': path,
+    })
+
+
+# Find airport with the longest duration
+def longest_duration(request):
+    airport = Airport.objects.order_by('-duration').first()
+    return render(request, 'duration.html', {
+        'title': 'Longest Duration',
+        'airport': airport
     })
