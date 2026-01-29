@@ -44,3 +44,12 @@ def longest_duration(request):
         'title': 'Longest Duration',
         'airport': airport
     })
+
+
+# Find airport with the shortest duration
+def shortest_duration(request):
+    airport = Airport.objects.order_by('duration').first()
+    return render(request, 'routes/duration.html', {
+        'title': 'Shortest Duration',
+        'airport': airport
+    })
