@@ -13,3 +13,14 @@ class AirportForm(forms.ModelForm):
             'left',
             'right'
         ]
+
+
+class SearchForm(forms.Form):
+    airport = forms.ModelChoiceField(
+        queryset=Airport.objects.all(),
+        label="Select Airport"
+    )
+    direction = forms.ChoiceField(
+        choices=(('L', 'Left'), ('R', 'Right')),
+        label="Direction"
+    )

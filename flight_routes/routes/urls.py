@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path('add/', views.add_airport),
+    path('search/', views.find_path),
 ]
-

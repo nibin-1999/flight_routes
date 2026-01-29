@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import AirportForm
+from .forms import AirportForm, SearchForm
 
 
 # Add a new airport view
@@ -10,3 +10,26 @@ def add_airport(request):
         form = AirportForm()
         form = AirportForm()
     return render(request, 'add_airport.html', {'form': form})
+
+
+# Find path view
+def find_path(request):
+    path = []
+    form = SearchForm(request.POST or None)
+
+    if form.is_valid():
+        airport = form.cleaned_data['airport']
+        direction = form.cleaned_data['direction']
+
+        current = airport
+        visited = set()
+
+        while current and current.id not in visited:
+            visited.add(current.id)
+            path.append(current)
+            current = current.left if direction == 'L' else current.right
+
+    return render(request, 'search.html', {
+        'form': form,
+        'path': path,
+    })

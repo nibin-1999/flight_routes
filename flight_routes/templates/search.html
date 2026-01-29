@@ -1,0 +1,11 @@
+
+<h2>Path along {{ form.cleaned_data.direction }}</h2>
+{% if path %}
+  <ul>
+    {% for airport in path %}
+      <li>{{ airport.airport_name }} ({{ airport.airport_code }}) - Duration: {{ airport.duration }}</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No airports found in this direction.</p>
+{% endif %}
