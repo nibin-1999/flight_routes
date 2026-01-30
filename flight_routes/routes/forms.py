@@ -3,6 +3,9 @@ from .models import Airport
 
 
 class AirportForm(forms.ModelForm):
+    """
+    Form for creating and updating Airport records.
+    """
     class Meta:
         model = Airport
         fields = [
@@ -11,16 +14,21 @@ class AirportForm(forms.ModelForm):
             'position',
             'duration',
             'left',
-            'right'
+            'right',
         ]
 
 
 class SearchForm(forms.Form):
+    """
+    Form used to select a starting airport and traversal direction
+    for finding connected airport paths.
+    """
     airport = forms.ModelChoiceField(
         queryset=Airport.objects.all(),
-        label="Select Airport"
+        empty_label="Select Airport"
     )
+
     direction = forms.ChoiceField(
         choices=(('L', 'Left'), ('R', 'Right')),
-        label="Direction"
+        widget=forms.RadioSelect
     )

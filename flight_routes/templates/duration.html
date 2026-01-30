@@ -1,5 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
 <h2>{{ title }}</h2>
+
 {% if airport %}
-  <p>Airport: {{ airport.airport_code }}</p>
-  <p>Duration: {{ airport.duration }}</p>
+    <div class="card">
+        <p><strong>Airport:</strong> {{ airport.airport_code }}</p>
+        <p><strong>Duration:</strong> {{ airport.duration }}</p>
+    </div>
+{% else %}
+    <p class="error">No airport data available.</p>
 {% endif %}
+{% endblock %}

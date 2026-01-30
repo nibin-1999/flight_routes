@@ -2,6 +2,12 @@ from django.db import models
 
 
 class Airport(models.Model):
+    """
+    Represents an airport node in a directional route system.
+    Each airport can connect to another airport on the left or right,
+    forming a linked structure.
+    """
+
     DIRECTION_CHOICES = (
         ('L', 'Left'),
         ('R', 'Right'),
@@ -19,6 +25,7 @@ class Airport(models.Model):
         blank=True,
         related_name='left_node'
     )
+
     right = models.ForeignKey(
         'self',
         on_delete=models.SET_NULL,
@@ -29,5 +36,3 @@ class Airport(models.Model):
 
     def __str__(self):
         return f"{self.airport_name} ({self.airport_code})"
-
-    

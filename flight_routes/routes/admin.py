@@ -4,7 +4,11 @@ from .models import Airport
 
 @admin.register(Airport)
 class AirportAdmin(admin.ModelAdmin):
-    # Columns shown in admin list view
+    """
+    Admin configuration for managing Airport records,
+    including route connections and search optimization.
+    """
+
     list_display = (
         'airport_name',
         'airport_code',
@@ -14,23 +18,19 @@ class AirportAdmin(admin.ModelAdmin):
         'right',
     )
 
-    # Search bar fields
     search_fields = (
         'airport_name',
         'airport_code',
     )
 
-    # Filters on right sidebar
     list_filter = (
         'position',
     )
 
-    # Order by airport code
     ordering = (
         'airport_code',
     )
 
-    # Fields arrangement in add/edit page
     fieldsets = (
         ('Airport Information', {
             'fields': (
@@ -48,7 +48,6 @@ class AirportAdmin(admin.ModelAdmin):
         }),
     )
 
-    # Improve dropdown usability for relations
     autocomplete_fields = (
         'left',
         'right',

@@ -1,11 +1,34 @@
+{% extends "base.html" %}
 
-<h2>Path along {{ form.cleaned_data.direction }}</h2>
+{% block title %}
+Search Route
+{% endblock %}
+
+{% block content %}
+<h2>Find Airport Route</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Find Route</button>
+</form>
+
 {% if path %}
-  <ul>
-    {% for airport in path %}
-      <li>{{ airport.airport_name }} ({{ airport.airport_code }}) - Duration: {{ airport.duration }}</li>
-    {% endfor %}
-  </ul>
-{% else %}
-  <p>No airports found in this direction.</p>
+    <div class="result">
+        <h3>Last Airport in this Direction</h3>
+        <strong>
+            {{ last_airport.airport_name }} ({{ last_airport.airport_code }})
+        </strong>
+
+        <h3>Connected Airports</h3>
+        <ul>
+            {% for airport in path %}
+                <li>{{ airport.airport_name }} ({{ airport.airport_code }})</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% elif no_path %}
+    <p class="error">No airports found in this direction.</p>
 {% endif %}
+{% endblock %}
